@@ -1,0 +1,76 @@
+server:
+  port: 8811
+  maxHttpHeaderSize: 50KB  # 大小 50KB
+  #  ssl:
+  #    key-store: classpath:99xc.vip.pfx #证书地址
+  #    key-store-password: wd3XigGt           #证书密码
+  #    key-store-type: PKCS12                #证书类型
+#  tomcat:
+#    acceptCount: 2000 #线程忙时的最大等待数
+#    maxThreads: 1000 #最大工作线程数，默认200。（4核8g内存，线程数经验值800，操作系统做线程之间的切换调度是有系统开销的，所以不是越多越好。）
+#    minSpareThreads: 1000 # 小工作空闲线程数，默认10。（适当增大一些，以便应对突然增长的访问量）
+
+#我的配置
+xc:
+  basic:
+    machineId: b001 # 服务唯一机器码
+    openPhoneCaptcha: false
+    openEmailCaptcha: false
+    basicPath: /BCloud
+  open:
+    basic:
+      openToken: true
+      openAuthority: false
+      openDataLog: true
+      appId: xc1954335814
+      appSecret: 37e117775a8de6bb35475f68635c1bc5ca7623647c77cd4b
+      captchaRedirectUri: /BCloud/captcha
+    file: # 文件服务，不配置不影响使用
+      feignName: file-server
+      feignUrl: http://test.ccxc.vip:8801/FCloud
+      diskNo: DN0108365509
+      diskSecret: 83759f77ad3f949199505e02e4cc9b63f48b514034b7013d
+      fixedPath: /BCloud
+      fileUrl: ${xc.open.file.feignUrl}
+
+swagger:
+  enabled: true
+  title: 基础服务平台
+  description: 平台基于OAuth2架构实现了单点登录，实现统一的登录。对系统开发过程中的基础数据进行管理，适合对接后台管理系统，网站系统。 拥有了该系统你可以将不用在关心用户登录，权限管理，只需要专注于业务功能开发。
+  
+
+#spring配置
+spring:
+  web:
+    resources:
+      static-locations: classpath:/public,classpath:/META-INF/resources/
+      cache:
+        cachecontrol:
+          no-cache: true
+  redis:
+    host: 127.0.0.1
+    database: 1
+    port: 6379
+    password: 123456
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false #开发时关闭缓存,不然没法看到实时页面
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  datasource:
+    url: jdbc:mysql://localhost:3306/BCloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&autoReconnect=true
+    username: root
+    password: 123456
+
+#mybatis-plus配置
+mybatis-plus:
+  # xml扫描
+  mapper-locations: classpath:/mapper/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.xc.**.entity
+  configuration: # MyBatis 配置
+    #开启日志打印
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

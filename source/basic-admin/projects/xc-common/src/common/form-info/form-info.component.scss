@@ -1,0 +1,379 @@
+nz-select {
+  width: 100%;
+}
+
+nz-tree-select {
+  width: 100%;
+}
+
+nz-input-number {
+  width: 100%;
+}
+
+// 查询form
+.query-form {
+  display: inline-block;
+  vertical-align: top;
+
+  .form-header {
+    border-bottom: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 0.5rem 0;
+    font: bold 1rem yahei;
+  }
+
+  .form-header::before {
+    content: "I";
+    background-color: #001529;
+    color: transparent;
+    margin: 0 0.5rem 0 0;
+  }
+
+  .form-block {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 290px;
+
+    .label {
+      display: inline-block;
+      vertical-align: top;
+      text-align: right;
+      width: 30%;
+      padding-right: 5px;
+    }
+
+    @media (max-width: 575px) {
+      .label {
+        line-height: 39.99px;
+      }
+      .label::after {
+        content: ":";
+        margin: 0 8px 0 2px;
+      }
+    }
+
+    .block {
+      display: inline-block;
+      vertical-align: top;
+      max-width: calc(100% - 30%);
+      width: 100%;
+    }
+
+  }
+
+  .button-block {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 4px;
+
+    .form-button {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}
+
+// 编辑form
+.edit-form {
+  .form-header {
+    border-bottom: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 0.5rem 0;
+    font: bold 1rem yahei;
+  }
+
+  .form-header::before {
+    content: "I";
+    background-color: #001529;
+    color: transparent;
+    margin: 0 0.5rem 0 0;
+  }
+
+  .form-block {
+    @media (max-width: 575px) {
+      .label::after {
+        content: ":";
+        margin: 0 8px 0 2px;
+      }
+    }
+
+    .upload-input {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .upload-input-button {
+        width: 25%
+      }
+
+      .upload-input-input {
+        width: calc(100% - 25%);
+      }
+    }
+
+    .picture-upload {
+      width: 128px;
+      height: 128px;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      padding: 8px;
+      border: 1px dashed #d9d9d9;
+      background-color: #fafafa;
+      position: relative;
+
+      i {
+        font-size: 32px;
+        color: #999;
+      }
+
+      .ant-upload-text {
+        margin-top: 8px;
+        color: #666;
+      }
+
+      .picture-delete {
+        position: absolute;
+        font-size: 20px;
+        padding-top: 3px;
+        padding-right: 3px;
+        height: 20px;
+        width: 20px;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+
+    .uploads {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+  }
+
+  // 块级
+  .open-block {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    .label {
+      width: 100%;
+      text-align: left;
+    }
+
+    @media (max-width: 575px) {
+      .label::after {
+        content: ":";
+        margin: 0 8px 0 2px;
+      }
+    }
+
+    .block {
+      width: 100%;
+    }
+
+    .upload-input {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      .upload-input-button {
+        width: 25%
+      }
+
+      .upload-input-input {
+        width: calc(100% - 25%);
+      }
+    }
+
+    .picture-upload {
+      width: 128px;
+      height: 128px;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      padding: 8px;
+      border: 1px dashed #d9d9d9;
+      background-color: #fafafa;
+      position: relative;
+
+      i {
+        font-size: 32px;
+        color: #999;
+      }
+
+      .ant-upload-text {
+        margin-top: 8px;
+        color: #666;
+      }
+
+      .picture-delete {
+        position: absolute;
+        font-size: 20px;
+        padding-top: 3px;
+        padding-right: 3px;
+        height: 20px;
+        width: 20px;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+      }
+    }
+
+    .uploads {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: top;
+    }
+  }
+
+  //行级
+  .open-line {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: calc(100% - 20px);
+
+    .label {
+      width: 100%;
+      line-height: 30px;
+      text-align: left;
+    }
+
+    @media (max-width: 575px) {
+      .label::after {
+        content: ":";
+        margin: 0 8px 0 2px;
+      }
+    }
+
+    .block {
+      width: 100%;
+      // 上传
+      .picture-upload {
+        width: 128px;
+        height: 128px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        padding: 8px;
+        border: 1px dashed #d9d9d9;
+        background-color: #fafafa;
+        position: relative;
+        overflow: hidden;
+
+        i {
+          font-size: 32px;
+          color: #999;
+        }
+
+        .ant-upload-text {
+          margin-top: 8px;
+          color: #666;
+        }
+
+        .picture-delete {
+          position: absolute;
+          font-size: 20px;
+          padding-top: 3px;
+          padding-right: 3px;
+          height: 20px;
+          width: 20px;
+          top: 0;
+          right: 0;
+          cursor: pointer;
+        }
+      }
+
+      .uploads {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        vertical-align: top;
+        height: auto;
+        min-height: 128px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 770px) {
+
+    .open-block {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 290px;
+
+      .label {
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+        width: 30%;
+        line-height: 40px;
+        padding-right: 5px;
+      }
+
+      @media (max-width: 575px) {
+        .label::after {
+          content: ":";
+          margin: 0 8px 0 2px;
+        }
+      }
+
+      .block {
+        display: inline-block;
+        vertical-align: top;
+        max-width: calc(100% - 30%);
+        width: 100%;
+      }
+    }
+
+    .open-line {
+      margin-top: 10px;
+      margin-right: 10px;
+      margin-left: 10px;
+      width: calc(100% - 20px);
+
+      .label {
+        display: inline-block;
+        vertical-align: top;
+        width: 81.5px;
+        line-height: 30px;
+      }
+
+      @media (max-width: 575px) {
+        .label::after {
+          content: ":";
+          margin: 0 8px 0 2px;
+        }
+      }
+
+      .block {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(100% - 81.5px);
+      }
+    }
+  }
+
+  .button-block {
+    text-align: center;
+
+    .form-button {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+}
+
+
+

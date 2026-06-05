@@ -1,0 +1,6 @@
+<app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+<!--  消息类容-->
+<nz-modal [(nzVisible)]="logInfo.isVisible" [nzTitle]="'错误信息'"
+          [nzOkText]="null" (nzOnCancel)="logInfo.isVisible = false">
+  <div>{{logInfo.content}}</div>
+</nz-modal>

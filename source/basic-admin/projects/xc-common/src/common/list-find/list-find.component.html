@@ -1,0 +1,180 @@
+<div class="list-find">
+  <div class="tf-find" *ngIf="tableFindModel.config.openFind">
+    <ng-container *ngFor="let find of tableFindModel.config.finds">
+      <ng-container *ngIf="find.input">
+        <div class="find-block">
+          <span class="block-name">{{find.name}}：</span>
+          <div class="block-frame">
+            <input nz-input type="text" placeholder="请输入" [(ngModel)]="tableFindModel.formInfo[find.field]"
+                   (change)="find.input.changeFun?find.input.changeFun(tableFindModel.formInfo,tableFindModel):null"/>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="find-search">
+      <ng-container *ngFor="let find of tableFindModel.config.finds">
+        <ng-container *ngIf="find.button">
+          <div class="form-button">
+            <button nz-button
+                    (click)="find.button.confirmFun?
+                  find.button.confirmFun(tableFindModel.formInfo,tableFindModel):
+                  tableFindModel.getData(tableFindModel.formInfo, null)"
+                    [nzType]="find.button.type?find.button.type:'primary'">
+              <i *ngIf="find.button.icon" nz-icon [nzType]="find.button.icon"></i>
+              {{find.name}}
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div class="tf-list">
+    <div class="label" *ngIf="tableFindModel.config.openLabel">
+      <nz-breadcrumb nzSeparator=">">
+        <ng-container *ngFor="let label of tableFindModel.config.breadcrumb.labels;let i=index">
+          <nz-breadcrumb-item
+            (click)="tableFindModel.config.breadcrumb.breadcrumbFun?
+            tableFindModel.config.breadcrumb.breadcrumbFun(label,i,tableFindModel):null">
+            <a class="label-a">{{label.name}}</a>
+          </nz-breadcrumb-item>
+        </ng-container>
+      </nz-breadcrumb>
+    </div>
+    <ul nz-list nzBordered nzSize="large"
+        [nzDataSource]="tableFindModel.dataModels"
+        [nzHeader]="header"
+        [nzRenderItem]="item"
+        [nzPagination]="tableFindModel.config.openPaging?pagination:null">
+      <ng-template #header>
+        <div class="list-header">
+          <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+            <ng-container *ngIf="table.type===COMMON_TYPE.table.CHECKBOX">
+              <div class="checkbox">
+                <label nz-checkbox [(ngModel)]="tableFindModel.selectedAll"
+                       (ngModelChange)="tableFindModel.checkAll(tableFindModel.selectedAll)">
+                  {{table.name}}
+                </label>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="table.type!==COMMON_TYPE.table.CHECKBOX&&table.name">
+              <div class="text" (click)="sort(table.field)">
+                <span>{{table.name}}</span>
+                <i *ngIf="table.isSort&&this.rule=='asc'" nz-icon nzType="sort-ascending" nzTheme="outline"></i>
+                <i *ngIf="table.isSort&&this.rule=='desc'" nz-icon nzType="sort-descending" nzTheme="outline"></i>
+                <span *ngIf="tableFindModel.getSelectedArray().length>0">
+                  &nbsp;{{tableFindModel.getSelectedArray().length}}个选中
+                </span>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="tableFindModel.config.openButton">
+            <div class="more" nzTrigger="click" nz-dropdown [nzDropdownMenu]="menu">
+              <i nz-tooltip nz-icon nzType="menu" nzTheme="outline"></i>
+            </div>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <ng-container *ngFor="let button of tableFindModel.config.buttons">
+                  <li nz-menu-item
+                      *ngIf="(button.bAuthority|BAuthority)&&button.type===COMMON_TYPE.button.BUTTON&&!button.hidden"
+                      [nzDisabled]="button.disabledFun?button.disabledFun(tableFindModel.formInfo,tableFindModel):null"
+                      (click)="button.confirmFun?button.confirmFun(tableFindModel.formInfo,tableFindModel):null">{{button.name}}</li>
+                </ng-container>
+              </ul>
+            </nz-dropdown-menu>
+          </ng-container>
+        </div>
+      </ng-template>
+      <ng-template #item let-item>
+        <nz-list-item [nzActions]="[opAction]" *ngIf="!item.hidden">
+          <nz-list-item-meta
+            [nzTitle]="nzTitle"
+            [nzAvatar]="avatar"
+            [nzDescription]="description">
+          </nz-list-item-meta>
+          <ng-template #avatar>
+            <div class="list-avatar">
+              <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+                <ng-container *ngIf="table.type===COMMON_TYPE.table.CHECKBOX">
+                  <div class="checkbox">
+                    <label nz-checkbox [(ngModel)]="item['selected']"
+                           (ngModelChange)="tableFindModel.check(item['selected'],item)">
+                      {{commonTool.conversion(item.data, table.field)}}
+                    </label>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="table.type===COMMON_TYPE.table.RADIO">
+                  <div class="radio">
+                    <label nz-radio (ngModelChange)="tableFindModel.singleSelect(item)"
+                           [ngModel]="item.selected"></label>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="table.type===COMMON_TYPE.table.IMAGE">
+                  <div class="image" [ngStyle]="table['tdStyle']"
+                       (click)="table.confirmFun?table.confirmFun(item,table,tableFindModel):null">
+                    <img [src]="commonTool.conversion(item.data, table.field)"/>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-template>
+          <ng-template #nzTitle>
+            <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+              <ng-container *ngIf="table.type===COMMON_TYPE.table.TITLE">
+                <div class="list-title" [ngStyle]="table['tdStyle']"
+                     (click)="table.confirmFun?table.confirmFun(item,table,tableFindModel):null">
+                  <a>{{commonTool.conversion(item.data, table.field)}}</a>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+          <ng-template #description>
+            <div class="list-description">
+              <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+                <ng-container *ngIf="table.type===COMMON_TYPE.table.DESCRIPTION">
+                  <div class="description" [ngStyle]="table['tdStyle']"
+                       (click)="table.confirmFun?table.confirmFun(item,table,tableFindModel):null">
+                    <span>{{commonTool.conversion(item.data, table.field)}}</span>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-template>
+          <ng-template #opAction>
+            <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+              <ng-container *ngIf="table.type===COMMON_TYPE.table.OPERATE">
+                <div nzTrigger="click" nz-dropdown [nzDropdownMenu]="more">
+                  <i nz-tooltip nz-icon nzType="more" nzTheme="outline"></i>
+                </div>
+                <nz-dropdown-menu #more="nzDropdownMenu">
+                  <ul nz-menu>
+                    <ng-container *ngIf="table.type===COMMON_TYPE.table.OPERATE">
+                      <ng-container *ngFor="let operate of table.operates">
+                        <li nz-menu-item
+                            *ngIf="(operate.bAuthority|BAuthority)&&(commonTool.notNull(item[operate.field])?item[operate.field]:true)"
+                            (click)="operate.confirmFun?operate.confirmFun(item, table, tableFindModel):null">
+                          {{operate.name}}</li>
+                      </ng-container>
+                    </ng-container>
+                  </ul>
+                </nz-dropdown-menu>
+              </ng-container>
+            </ng-container>
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+      <ng-template #pagination>
+        <nz-pagination
+          *ngIf="tableFindModel.config.openPaging"
+          [nzSize]="'small'"
+          [nzShowQuickJumper]="true"
+          [nzShowSizeChanger]="tableFindModel.config.paging.limits.length>0"
+          [(nzPageSize)]="tableFindModel.pagingModel.size"
+          [nzPageSizeOptions]="tableFindModel.config.paging.limits"
+          [(nzPageIndex)]="tableFindModel.pagingModel.current"
+          [nzTotal]="tableFindModel.pagingModel.total"
+          (nzPageSizeChange)="sizeChange($event)"
+          (nzPageIndexChange)="indexChange($event)"></nz-pagination>
+      </ng-template>
+    </ul>
+  </div>
+</div>

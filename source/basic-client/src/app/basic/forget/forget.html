@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <template th:include="/common/head/head::head('找回密码')" th:remove="tag"></template>
+</head>
+<body>
+<div class="forget-all">
+    <div class="forget-from">
+        <div class="forget-title">
+            <h3 class="text" th:text="${appName}"></h3>
+        </div>
+        <div class="forget" th:if="${app['openPhoneForget']=='0'||app['openEmailForget']=='0'}">
+            <div class="forget-head">
+                <div th:if="${app['openPhoneForget']=='0'}" class="phone-forget" id="phoneForget">手机找回</div>
+                <div th:if="${app['openEmailForget']=='0'}" class="email-forget" id="emailForget">邮箱找回</div>
+            </div>
+            <div class="phone-forget-form" th:if="${app['openPhoneForget']=='0'}" id="phoneForgetForm">
+                <!--手机号-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-zhanghu"></use>
+                    </svg>
+                    <input class="xc-input" type="text" id="phone" placeholder="手机号" maxlength="11">
+                    <span class="error"></span>
+                </div>
+                <!--验证码-->
+                <div class="input-block">
+                    <div class=" captcha">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#xc-ecurityCode"></use>
+                        </svg>
+                        <input class="xc-input" type="text" id="phoneCaptcha" placeholder="验证码">
+                        <span class="error"></span>
+                    </div>
+                    <div class="captcha-button">
+                        <button id="phoneCaptchaButton" class="xc-button" type="button">获取验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="email-forget-form" th:if="${app['openEmailForget']=='0'}" id="emailForgetForm">
+                <!--邮箱-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-zhanghu"></use>
+                    </svg>
+                    <input class="xc-input" type="text" id="email" placeholder="邮箱">
+                    <span class="error"></span>
+                </div>
+                <!--验证码-->
+                <div class="input-block">
+                    <div class=" captcha">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#xc-ecurityCode"></use>
+                        </svg>
+                        <input class="xc-input" type="text" id="emailCaptcha" placeholder="验证码">
+                        <span class="error"></span>
+                    </div>
+                    <div class="captcha-button">
+                        <button id="emailCaptchaButton" class="xc-button" type="button">获取验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="other-input">
+                <!--密码-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-mima"></use>
+                    </svg>
+                    <input class="xc-input" type="password" id="password" placeholder="密码" maxlength="24">
+                    <span class="error"></span>
+                </div>
+
+                <!--密码-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-mima"></use>
+                    </svg>
+                    <input class="xc-input" type="password" id="repeatPassword" placeholder="确认密码" maxlength="24">
+                    <span class="error"></span>
+                </div>
+            </div>
+            <div class="button-submit">
+                <!--按钮-->
+                <div class="button-block">
+                    <button id="submit" class="xc-button" type="button">提交</button>
+                </div>
+                <!--注册/忘记密码-->
+                <div class="button-block jump-page">
+                    <a></a>
+                    <a id="loginJump">登录</a>
+                </div>
+            </div>
+        </div>
+        <div class="forget" th:if="${app['openPhoneForget']!='0'&&app['openEmailForget']!='0'}">
+            <p class="tips-text">系统暂不支持找回密码，请联系管理员！</p>
+            <a class="revert-login" id="revertLogin">返回登录</a>
+        </div>
+        <div style="display: none">
+            <div id="appId" th:text="${appId}"></div>
+            <div id="redirectUri" th:text="${redirectUri}"></div>
+            <div id="state" th:text="${state}"></div>
+        </div>
+    </div>
+    <!--页脚-->
+    <div th:include="common/footer/footer::footer" th:remove="tag"></div>
+</div>
+</body>
+</html>

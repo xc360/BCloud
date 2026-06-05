@@ -1,0 +1,164 @@
+.list-find {
+  min-width: 242px;
+}
+
+// 查询样式
+.tf-find {
+  margin-top: 1.25rem;
+
+  .find-block {
+    display: inline-block;
+    margin: 0 0 0.5rem 1rem;
+
+    .block-frame {
+      display: inline-block;
+      width: 167px;
+    }
+
+    .block-name {
+      min-width: 1rem;
+      text-align: right;
+      float: left;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .find-search {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0.625rem;
+
+    .form-button {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding-top: 4px;
+    }
+  }
+
+}
+
+// 按钮样式
+.tf-button {
+
+  button {
+    margin-top: 0.625rem;
+    margin-left: 0.625rem;
+  }
+
+  button[disabled] {
+    margin-top: 0.625rem;
+    margin-left: 0.625rem;
+  }
+
+}
+
+.tf-list {
+  margin: 10px;
+  min-width: 298px;
+
+  ::ng-deep .ant-spin-container {
+    height: 100%;
+  }
+
+  ::ng-deep .ant-breadcrumb-separator {
+    margin: 0;
+  }
+
+  ::ng-deep .ant-list-bordered.ant-list-lg {
+    .ant-list-footer, .ant-list-header {
+      padding: 5px 10px 5px 10px;
+      font-size: 14px;
+    }
+  }
+
+  ::ng-deep .ant-list-lg .ant-list-item {
+    padding: 5px 10px 5px 10px;
+  }
+
+  ::ng-deep .ant-list-item-meta-title {
+    margin-bottom: 0;
+  }
+
+  .label {
+    .label-a {
+      width: 100%;
+      word-break: break-all
+    }
+  }
+
+  .list-header {
+    height: 32px;
+    position: relative;
+
+    .checkbox {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 5px;
+    }
+
+    .text {
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 8px;
+      margin-top: 5px;
+      min-width: 86%;
+    }
+
+    .more {
+      display: inline-block;
+      vertical-align: top;
+      position: absolute;
+      top: 5px;
+      right: 7px;
+    }
+  }
+
+  .list-avatar {
+    .checkbox {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 8px;
+    }
+
+    .radio {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 8px;
+      width: 16px;
+    }
+
+    .image {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 5px;
+      margin-left: 8px;
+      height: 30px;
+      width: 30px;
+
+      img {
+        height: inherit;
+        width: inherit;
+        border-radius: 20%;
+      }
+    }
+  }
+
+  .list-title {
+    width: 100%;
+    word-break: break-all
+  }
+
+  .list-description {
+    font-size: 12px;
+    line-height: 17px;
+
+    .description {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 20px
+    }
+  }
+}
+

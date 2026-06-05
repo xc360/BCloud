@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${appName}">基础服务平台</title>
+    <meta name="description" th:content="${app['seo_description']}"/>
+    <meta name="keywords" th:content="${app['seo_keywords']}"/>
+    <template th:include="/common/head/head::head('验证码')" th:remove="tag"></template>
+</head>
+<body>
+<!--内容-->
+<div class="captcha content-background">
+    <div class="captcha-block" style="text-align: center">
+        <div class="captcha-img-tip">
+            <img class="captcha-img" th:src="${captchaUrl}">
+            <p class="captcha-tip" th:text="${message}"></p>
+        </div>
+        <form id="form">
+            <input type="text" name="openUrl" th:value="${openUrl}" hidden>
+            <input type="text" name="captchaCode" th:value="${captchaCode}" hidden>
+            <input type="text" name="redirectUrl" th:value="${redirectUrl}" hidden>
+            <!--验证码-->
+            <div class="input-block">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#xc-ecurityCode"></use>
+                </svg>
+                <input name="captcha" class="xc-input" type="text" placeholder="验证码" maxlength="60"
+                       id="account">
+                <span class="error"></span>
+            </div>
+            <!--提交-->
+            <div class="button-block">
+                <input id="submit" class="xc-button" type="submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

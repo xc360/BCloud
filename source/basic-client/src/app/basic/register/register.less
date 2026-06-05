@@ -1,0 +1,228 @@
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.register-all {
+  background-color: #E4EBF2;
+  min-height: 100vh;
+  position: relative;
+
+  .register-from {
+    min-height: calc(100vh - 61px);
+  }
+
+  .register-title {
+    height: 282px;
+    background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+    overflow: hidden;
+    text-align: center;
+
+    .text {
+      font-weight: 500;
+      font-size: 21px;
+      margin-top: 40px;
+      color: white;
+    }
+  }
+
+
+  .register {
+    position: absolute;
+    margin: 0 auto;
+    top: 112px;
+    left: calc(50% - (305px / 2));
+    width: 305px;
+    height: 480px;
+    background-color: white;
+    box-shadow: 1px 1px 29px 0px rgba(76, 154, 209, 0.13);
+    border-radius: 10px;
+    text-align: center;
+
+    .register-head {
+      text-align: center;
+      color: #757575;
+      font-weight: 500;
+      margin-top: 44px;
+      font-size: 18px;
+
+      div {
+        width: 90px;
+      }
+
+      .selected {
+        border-bottom: 3px #52d3aa solid;
+        font-size: 20px;
+        padding-bottom: 5px;
+      }
+
+      .phone-register {
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+      }
+
+      .email-register {
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+      }
+    }
+
+    .phone-register-form, .email-register-form {
+      display: none;
+      width: 280px;
+      margin-left: 12.5px;
+      margin-top: 40px;
+      text-align: left;
+
+      .captcha {
+        display: inline-block;
+        vertical-align: top;
+        width: 112px;
+      }
+
+      .captcha-button {
+        display: inline-block;
+        width: 33%;
+        margin-left: 70.5px;
+      }
+
+      .captcha-block {
+        display: none
+      }
+    }
+
+    .other-input {
+      width: 280px;
+      margin-left: 12.5px;
+      text-align: left;
+
+      .input-checkbox {
+        color: #757575;
+
+        .agreement {
+          cursor: pointer;
+          color: #52d3aa;
+          margin: 0 3px;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .open {
+      display: block !important;
+    }
+
+    .button-submit {
+      width: 280px;
+      margin-left: 12.5px;
+      text-align: left;
+
+      .xc-button {
+        background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+        border: 1px solid #52d3aa;
+      }
+
+      .jump-page {
+        a {
+          text-decoration: none;
+          color: #757575;
+          cursor: pointer;
+        }
+
+        a:nth-child(1) {
+          position: absolute;
+          right: 0px;
+        }
+      }
+    }
+
+    .tips-text {
+      margin-top: 235px;
+      color: #757575;
+    }
+
+    .revert-login {
+      cursor: pointer;
+      color: #3f95ea;
+    }
+  }
+
+  .eject {
+    width: 258px;
+    position: fixed;
+    background-color: white;
+    z-index: 200;
+    border: 1px #d9d9d9 solid;
+    padding: 20px;
+    left: calc(50% - 150px);
+    border-radius: 10px;
+    display: none;
+    top: 145px;
+
+    .eject-head {
+      text-align: center;
+      height: 40px;
+      text-decoration: none;
+      color: #757575;
+    }
+
+    .eject-content {
+      .captcha-block {
+        .captcha {
+          display: inline-block;
+          vertical-align: top;
+          width: 112px;
+        }
+
+        .captcha-button {
+          display: inline-block;
+          width: 33%;
+          margin-left: 70.5px;
+        }
+
+        .captcha img {
+          width: 112px;
+          position: absolute;
+          height: 32px;
+          border: 1px solid #d9d9d9;
+          border-radius: 4px;
+          right: 0;
+        }
+      }
+    }
+
+    .eject-footer {
+      position: relative;
+      height: 50px;
+
+      .xc-button {
+        margin-top: 10px;
+        width: 100px;
+      }
+
+      .xc-button:first-child {
+        position: absolute;
+        left: 0;
+        color: white;
+        background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+        border: 1px solid #52d3aa;
+      }
+
+      .xc-button {
+        position: absolute;
+        right: 0;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .register-all {
+    min-height: 114vh;
+  }
+}
+

@@ -1,0 +1,22 @@
+<app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+<!--  信息管理-->
+<nz-modal nzTitle="信息管理" [(nzVisible)]="isVisible" (nzOnCancel)="isVisible = false"
+          (nzOnOk)="confirmOk()" (nzAfterOpen)="formInfoComponent.focus('describe')"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>
+<!--  导入/导出-->
+<nz-modal [(nzVisible)]="listInfo.isVisible"
+          [nzTitle]="(listInfo.isImport?'导入':'导出')+'信息'"
+          (nzOnCancel)="listInfo.isVisible = false"
+          (nzOnOk)="listInfoOk()"
+          [nzOkText]="!listInfo.isImport?null:''"
+          [nzOkDisabled]="!listInfo.content||appService.getLoading()">
+  <nz-form-item>
+    <nz-form-label>{{(listInfo.isImport ? '导入' : '导出') + '信息'}}</nz-form-label>
+    <nz-form-control>
+      <textarea [placeholder]="(listInfo.isImport?'导入':'导出')+'信息'"
+                rows="10" nz-input [(ngModel)]="listInfo.content"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</nz-modal>

@@ -1,0 +1,51 @@
+{
+  "id": "1238006",
+  "name": "ccxcw",
+  "font_family": "iconfont",
+  "css_prefix_text": "xc-",
+  "description": "ccxcw",
+  "glyphs": [
+    {
+      "icon_id": "4988467",
+      "name": "多图",
+      "font_class": "duotu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1037754",
+      "name": "关闭",
+      "font_class": "guanbi",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "3050498",
+      "name": "验证码",
+      "font_class": "ecurityCode",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "6945224",
+      "name": "yanzhengma",
+      "font_class": "yanzhengma2",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "5485693",
+      "name": "账户",
+      "font_class": "zhanghu",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "1025248",
+      "name": "密码",
+      "font_class": "mima",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<div class="audit-details">
+  <div class="audit-button">
+    <button nz-button nzType="primary" (click)="openAudit()"
+            *ngIf="LoginTool.verifyAuthority(BUTTON_CODE.b_app_audit)">审核
+    </button>
+    <button nz-button nzType="primary" (click)="revert()">返回</button>
+  </div>
+  <app-table-detail [tableDetailModel]="tableDetailModel"></app-table-detail>
+</div>
+<!--  审核-->
+<nz-modal nzTitle="审核" [(nzVisible)]="isVisible"
+          (nzOnCancel)="isVisible = false" (nzOnOk)="confirmOk()"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <template th:include="/common/head/head::head(${agreementTitle})" th:remove="tag"></template>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+</head>
+<body>
+<div id="backTop" class="show-all content-background">
+    <div class="show-block">
+        <div class="show-content">
+            <div class="show-markdown">
+                <div class="markdown-head ">
+                    <h3 th:text="${agreementTitle}">某某协议</h3>
+                    <h4 th:text="${appVersion}">v1.0.0</h4>
+                </div>
+                <div id="markdownBody" class="markdown-body editormd-preview-container"
+                     th:data-content="${agreementContent}"></div>
+            </div>
+        </div>
+    </div>
+    <!--回到顶部-->
+    <div th:include="common/back-top/back-top::backTop" th:remove="tag"></div>
+</div>
+</body>
+</html>

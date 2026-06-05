@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${appName}">基础服务平台</title>
+	<meta name="description" th:content="${app['seo_description']}"/>
+	<meta name="keywords" th:content="${app['seo_keywords']}"/>
+	<template th:include="/common/head/head::head('版本')" th:remove="tag"></template>
+</head>
+<body>
+<!--内容-->
+<div id="backTop" class="app content-background">
+	<div class="app-block-list">
+		<div class="app-block" th:each="data, i : ${paging['resData']}">
+			<div class="title" th:text="${data.appVersion}"></div>
+			<p class="update-content" th:utext="${data.updateContent}"></p>
+			<a class="app-button" th:if="${data.type=='1'||data.type=='2'}" th:href="${data.packageUrl}">下载</a>
+			<a class="app-button" th:href="${basicPath+'/show/app/'+appId+'/version/'+data.id}">文档</a>
+		</div>
+		<div class="app-page">
+			<!--分页-->
+			<div th:include="common/page/page::page(${paging},${basicPath}+'/nav/app/'+${appId}+'/version')" th:remove="tag"></div>
+		</div>
+	</div>
+	<!--回到顶部-->
+	<div th:include="common/back-top/back-top::backTop" th:remove="tag"></div>
+</div>
+</body>
+</html>

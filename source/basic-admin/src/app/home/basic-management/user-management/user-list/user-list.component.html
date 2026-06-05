@@ -1,0 +1,7 @@
+<app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+<!--  关联用户组和角色-->
+<nz-modal nzTitle="关联用户组和角色" [(nzVisible)]="isVisible"
+          (nzOnCancel)="isVisible = false" (nzOnOk)="confirmOk()"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>

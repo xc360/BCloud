@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <template th:include="/common/head/head::head('注册')" th:remove="tag"></template>
+</head>
+<body>
+<div class="register-all">
+    <div class="register-from">
+        <div class="register-title">
+            <h3 class="text" th:text="${appName}"></h3>
+        </div>
+        <div class="register" th:if="${app['openPhoneRegister']=='0'||app['openEmailRegister']=='0'}">
+            <div class="register-head">
+                <div th:if="${app['openPhoneRegister']=='0'}" class="phone-register" id="phoneRegister">
+                    手机注册
+                </div>
+                <div th:if="${app['openEmailRegister']=='0'}" class="email-register" id="emailRegister">邮箱注册
+                </div>
+            </div>
+            <div th:if="${app['openPhoneRegister']=='0'}" class="phone-register-form" id="phoneRegisterForm">
+                <!--手机号-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-zhanghu"></use>
+                    </svg>
+                    <input class="xc-input" type="text" id="phone" placeholder="手机号" maxlength="11">
+                    <span class="error"></span>
+                </div>
+                <!--验证码-->
+                <div class="input-block">
+                    <div class=" captcha">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#xc-ecurityCode"></use>
+                        </svg>
+                        <input class="xc-input" type="text" id="phoneCaptcha" placeholder="验证码">
+                        <span class="error"></span>
+                    </div>
+                    <div class="captcha-button">
+                        <button id="phoneCaptchaButton" class="xc-button" type="button">获取验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${app['openEmailRegister']=='0'}" class="email-register-form" id="emailRegisterForm">
+                <!--邮箱-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-zhanghu"></use>
+                    </svg>
+                    <input class="xc-input" type="text" id="email" placeholder="邮箱">
+                    <span class="error"></span>
+                </div>
+                <!--验证码-->
+                <div class="input-block">
+                    <div class=" captcha">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#xc-ecurityCode"></use>
+                        </svg>
+                        <input class="xc-input" type="text" id="emailCaptcha" placeholder="验证码">
+                        <span class="error"></span>
+                    </div>
+                    <div class="captcha-button">
+                        <button id="emailCaptchaButton" class="xc-button" type="button">获取验证码</button>
+                    </div>
+                </div>
+            </div>
+            <div class="other-input">
+                <!--密码-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-mima"></use>
+                    </svg>
+                    <input class="xc-input" type="password" id="password" placeholder="密码" maxlength="24">
+                    <span class="error"></span>
+                </div>
+
+                <!--密码-->
+                <div class="input-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#xc-mima"></use>
+                    </svg>
+                    <input class="xc-input" type="password" id="repeatPassword" placeholder="确认密码" maxlength="24">
+                    <span class="error"></span>
+                </div>
+
+                <!--协议-->
+                <div class="input-checkbox">
+                    <input class="xc-checkbox" type="checkbox" id="agreement" placeholder="确认密码">
+                    <span>我已阅读并同意<a class="agreement" id="userAgreement">用户协议</a>及<a class="agreement" id="privacyAgreement">隐私协议</a></span>
+                    <span class="error"></span>
+                </div>
+            </div>
+            <div class="button-submit">
+                <!--按钮-->
+                <div class="button-block">
+                    <button id="submit" class="xc-button" type="button">提交</button>
+                </div>
+                <!--注册/忘记密码-->
+                <div class="button-block jump-page">
+                    <a></a>
+                    <a id="loginJump">登录</a>
+                </div>
+            </div>
+        </div>
+        <div class="register" th:if="${app['openPhoneRegister']!='0'&&app['openEmailRegister']!='0'}">
+            <p class="tips-text">系统暂不支持注册，请联系管理员！</p>
+            <a class="revert-login" id="revertLogin">返回登录</a>
+        </div>
+        <div style="display: none">
+            <div id="appId" th:text="${appId}"></div>
+            <div id="redirectUri" th:text="${redirectUri}"></div>
+            <div id="state" th:text="${state}"></div>
+        </div>
+        <div class="eject" id="eject">
+            <div class="eject-head">
+                <span>获取验证码</span>
+            </div>
+            <div class="eject-content">
+                <!--图片验证码-->
+                <div class="input-block captcha-block">
+                    <div class="captcha">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#xc-ecurityCode"></use>
+                        </svg>
+                        <input class="xc-input" type="text" placeholder="验证码" maxlength="6" id="imgCaptcha">
+                        <span class="error"></span>
+                    </div>
+                    <div class="login-block-image captcha">
+                        <img id="imgCaptchaImg">
+                    </div>
+                </div>
+            </div>
+            <div class="eject-footer">
+                <button id="imgCaptchaConfirm" class="xc-button" type="button">确认</button>
+                <button id="imgCaptchaClose" class="xc-button" type="button">取消</button>
+            </div>
+        </div>
+    </div>
+    <!--页脚-->
+    <div th:include="common/footer/footer::footer" th:remove="tag"></div>
+</div>
+</body>
+</html>

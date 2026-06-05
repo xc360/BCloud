@@ -1,0 +1,147 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.forget-all {
+  background-color: #E4EBF2;
+  min-height: 100vh;
+  position: relative;
+
+  .forget-from {
+    min-height: calc(100vh - 61px);
+  }
+
+  .forget-title {
+    height: 282px;
+    background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+    overflow: hidden;
+    text-align: center;
+
+    .text {
+      font-weight: 500;
+      font-size: 21px;
+      margin-top: 40px;
+      color: white;
+    }
+  }
+
+
+  .forget {
+    position: absolute;
+    margin: 0 auto;
+    top: 112px;
+    left: calc(50% - (305px / 2));
+    width: 305px;
+    height: 480px;
+    background-color: white;
+    box-shadow: 1px 1px 29px 0px rgba(76, 154, 209, 0.13);
+    border-radius: 10px;
+    text-align: center;
+
+    .forget-head {
+      text-align: center;
+      color: #757575;
+      font-weight: 500;
+      margin-top: 44px;
+      font-size: 18px;
+
+      div {
+        width: 90px;
+      }
+
+      .selected {
+        border-bottom: 3px #52d3aa solid;
+        font-size: 20px;
+        padding-bottom: 5px;
+      }
+
+      .phone-forget {
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+      }
+
+      .email-forget {
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+      }
+    }
+
+    .phone-forget-form, .email-forget-form {
+      display: none;
+      width: 280px;
+      margin-left: 12.5px;
+      margin-top: 40px;
+      text-align: left;
+
+      .captcha {
+        display: inline-block;
+        vertical-align: top;
+        width: 112px;
+      }
+
+      .captcha-button {
+        display: inline-block;
+        width: 33%;
+        margin-left: 70.5px;
+      }
+
+      .captcha-block {
+        display: none
+      }
+    }
+
+    .other-input {
+      width: 280px;
+      margin-left: 12.5px;
+      text-align: left;
+    }
+
+    .open {
+      display: block !important;
+    }
+
+    .button-submit {
+      width: 280px;
+      margin-left: 12.5px;
+      text-align: left;
+
+      .xc-button {
+        background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+        border: 1px solid #52d3aa;
+      }
+
+      .jump-page {
+        a {
+          text-decoration: none;
+          color: #757575;
+          cursor: pointer;
+        }
+
+        a:nth-child(1) {
+          position: absolute;
+          right: 0px;
+        }
+      }
+    }
+
+    .tips-text {
+      margin-top: 235px;
+      color: #757575;
+    }
+
+    .revert-login {
+      cursor: pointer;
+      color: #3f95ea;
+    }
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .forget-all {
+    min-height: 114vh;
+  }
+}
+

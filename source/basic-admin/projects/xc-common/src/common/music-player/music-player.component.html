@@ -1,0 +1,61 @@
+<div class="xc-music-player">
+  <div class="name">
+    <span>{{currentMusic.name}}</span>
+  </div>
+  <div class="progress">
+    <nz-slider [(ngModel)]="progress" [nzMax]="this.audio.duration"
+               (ngModelChange)="progressChange($event);progress=$event">
+    </nz-slider>
+  </div>
+  <div class="controller">
+    <button nz-button nzType="primary" [nzSize]="'small'" [nzGhost]="true"
+            nzShape="round" (click)="lastSong(this.currentMusic.id)">
+      <i nz-icon nzType="step-backward" nzTheme="outline"></i>
+    </button>
+    <button nz-button nzType="primary" [nzSize]="'small'" [nzGhost]="true"
+            nzShape="round" (click)="stop(suspend)">
+      <i *ngIf="!suspend" nz-icon nzType="pause" nzTheme="outline"></i>
+      <i *ngIf="suspend" nz-icon nzType="caret-right" nzTheme="outline"></i>
+    </button>
+    <button nz-button nzType="primary" [nzSize]="'small'" [nzGhost]="true"
+            nzShape="round" (click)="nextSong(this.currentMusic.id)">
+      <i nz-icon nzType="step-forward" nzTheme="outline"></i>
+    </button>
+    <button nz-button nzType="primary" [nzSize]="'small'" [nzGhost]="true" nzShape="round"
+            (click)="playOrder(playType)">
+      <i *ngIf="playType=='list-loop'" nz-icon nzType="retweet" nzTheme="outline"></i>
+      <i *ngIf="playType=='random'" nz-icon nzIconfont="icon-random"></i>
+      <i *ngIf="playType=='single-loop'" nz-icon nzIconfont="icon-danquxunhuan1"></i>
+    </button>
+    <button nz-button nzType="primary" [nzSize]="'small'" [nzGhost]="true"
+            nzShape="round" (click)="isPlayList=!isPlayList">
+      <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+    </button>
+    <div class="volume">
+      <div class="volume-icon">
+        <i nz-icon *ngIf="!mute" nzIconfont="icon-voice" (click)="volumeSize(0);mute=!mute"></i>
+        <i nz-icon *ngIf="mute" nzIconfont="icon-mute" (click)="volumeSize(volumeNum);mute=!mute"></i>
+      </div>
+      <div class="volume-slider">
+        <nz-slider [ngModel]="volumeNum" (ngModelChange)="volumeSize($event);volumeNum=$event"></nz-slider>
+      </div>
+    </div>
+  </div>
+  <div class="music-list" *ngIf="isPlayList">
+    <nz-list [nzDataSource]="playList" nzBordered [nzHeader]="'歌名'" [nzRenderItem]="defaultItem">
+      <ng-template #defaultItem let-item>
+        <ng-container *ngIf="item.id==currentMusic.id">
+          <li nz-list-item nzNoFlex (click)="play(item.id)"
+              style="background-color: #91d5ff">
+            {{ item.name }}
+          </li>
+        </ng-container>
+        <ng-container *ngIf="item.id!==currentMusic.id">
+          <li nz-list-item nzNoFlex (click)="play(item.id)">
+            {{ item.name }}
+          </li>
+        </ng-container>
+      </ng-template>
+    </nz-list>
+  </div>
+</div>

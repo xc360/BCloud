@@ -1,0 +1,16 @@
+<div class="linkage-select">
+  <div class="linkage-block-frame" *ngFor="let child of selectItem,let j=index"
+       [ngStyle]="{width:(100/selectItem.length)+'%'}">
+    <span *ngIf="child['name']" class="linkage-block-frame-name">{{child["name"]}}</span>
+    <nz-select [(ngModel)]="formInfo[child.field]"
+               [disabled]="child.disabled"
+               [nzPlaceHolder]="child.placeholder?child.placeholder:child['name']"
+               [style]="{'border-radius':'0em 0.25em 0.25em 0em'}"
+               (nzOpenChange)="child.initOptionFun?child.initOptionFun($event,formInfo,this):null"
+               (ngModelChange)="child.confirmFun?child.confirmFun(formInfo,this):null">
+      <ng-container *ngFor="let arr of child.dictType|dictList:child.options|async">
+        <nz-option [nzLabel]="arr.name" [nzValue]="arr.value"></nz-option>
+      </ng-container>
+    </nz-select>
+  </div>
+</div>

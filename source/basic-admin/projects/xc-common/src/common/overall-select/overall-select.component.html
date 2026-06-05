@@ -1,0 +1,16 @@
+<div class="overall-select">
+  <nz-form-item class="form-block">
+    <nz-form-label *ngIf="openLabel" class="label" [nzRequired]="true">
+      <span [ngStyle]="labelStyle">{{labelName}}</span>
+    </nz-form-label>
+    <nz-form-control class="block">
+      <nz-select (nzOpenChange)="openFun($event)" [nzPlaceHolder]="labelName"
+                 (ngModelChange)="selectedChange($event)"
+                 [(ngModel)]="id">
+        <ng-container *ngFor="let app of options">
+          <nz-option [nzLabel]="app.name" [nzValue]="app.value"></nz-option>
+        </ng-container>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+</div>

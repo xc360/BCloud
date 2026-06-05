@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${appName}">基础服务平台</title>
+    <meta name="description" th:content="${app['seo_description']}"/>
+    <meta name="keywords" th:content="${app['seo_keywords']}"/>
+    <template th:include="/common/head/head::head('文档')" th:remove="tag"></template>
+</head>
+<body>
+<!--内容-->
+<div id="backTop" class="show-all content-background">
+    <div class="show-block">
+        <div class="show-content">
+            <div id="markdownBody" class="markdown-body editormd-preview-container"
+                 th:data-content="${versionDto.docContent}"></div>
+        </div>
+    </div>
+    <!--回到顶部-->
+    <div th:include="common/back-top/back-top::backTop" th:remove="tag"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<!--分页-->
+<div th:fragment="page(paging,url)">
+	<div class="page-list" th:if="${paging.total!=0}">
+		<a th:if="${paging.current>1}"
+		   th:href="${url+'/1'}">首页</a>
+		<a th:if="${paging.current>1}"
+		   th:href="${url+'/'+ (paging.current-1)}">上一页</a>&nbsp;
+		<template
+				th:each="num, i :${#numbers.sequence(0,paging.total%paging.size==0?paging.total/paging.size-1:paging.total/paging.size)}"
+				th:remove="tag">
+			<template th:if="${((i.index+1)>paging.current-5)&&(i.index+1)<paging.current+6}"
+			          th:remove="tag">
+				<b th:if="${(i.index+1)==paging.current}" th:text="${paging.current}"></b>
+				<a th:if="${(i.index+1)!=paging.current}"
+				   th:href="${url+'/'+ (i.index+1)}"
+				   th:text="${i.index+1}"></a>&nbsp;
+			</template>
+		</template>
+		<a th:if="${paging.current}<(${paging.total}/${paging.size})"
+		   th:href="${url+'/'+(paging.current+1)}">下一页</a>&nbsp;
+		<a th:if="${paging.current}<(${paging.total}/${paging.size})"
+		   th:href="${url+'/'+ (paging.total%paging.size==0?paging.total/paging.size:paging.total/paging.size+1)}">尾页</a>
+	</div>
+</div>
+</body>
+</html>

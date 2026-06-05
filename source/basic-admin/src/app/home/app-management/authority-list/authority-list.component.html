@@ -1,0 +1,14 @@
+<app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+<!--  拒绝原因-->
+<nz-modal nzTitle="拒绝原因"
+          [(nzVisible)]="isVisible" (nzOnCancel)="isVisible = false"
+          [nzOkText]="'关闭'" [nzCancelText]="null" (nzOnOk)="isVisible = false"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>
+<!--  申请原因-->
+<nz-modal nzTitle="申请原因"
+          [(nzVisible)]="isApplyVisible" (nzOnCancel)="isApplyVisible = false"
+          (nzOnOk)="confirmOk()" [nzOkDisabled]="formInfoModel1.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel1"></app-form-info>
+</nz-modal>

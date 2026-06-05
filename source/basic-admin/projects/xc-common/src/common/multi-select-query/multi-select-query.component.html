@@ -1,0 +1,22 @@
+<div class="app-month-calendar">
+  <div class="month-selected-value">
+    <input class="month-calendar-input" type="text" value="{{value}}" placeholder="请选择年月"
+           readonly (click)="show = true">
+    <span class="month-calendar-icon pi pi-calendar" (click)="show = true"></span>
+    <span *ngIf="value" class="fa fa-close clear-btn" (click)="clear()"></span>
+  </div>
+  <div class="month-dropdown" *ngIf="show">
+    <div class="year-select-con">
+      <select [(ngModel)]="selectedValue" (ngModelChange)="selectChange(selectedValue)">
+        <option *ngFor="let select of selectItem" value="{{select.value}}">{{select.name}}</option>
+      </select>
+    </div>
+    <div class="month-ui">
+      <a *ngFor="let select of  selectedData.children" class="month-item" (click)="selection(select)">
+        <input type="checkbox" [value]="select.value" [checked]="checkedMap[select.value]"
+               [disabled]="select.disabled"/>
+        <span>{{select.name}}</span>
+      </a>
+    </div>
+  </div>
+</div>

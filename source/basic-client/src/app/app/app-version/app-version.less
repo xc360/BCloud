@@ -1,0 +1,140 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  text-align: center;
+  overflow-y: auto;
+  height: calc(100vh - 40px);
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.content-background {
+  width: 100%;
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #52d3aa;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAxIDEiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0idnNnZyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIHN0b3AtY29sb3I9IiMzZjk1ZWEiIHN0b3Atb3BhY2l0eT0iMSIgb2Zmc2V0PSIwIi8+PHN0b3Agc3RvcC1jb2xvcj0iIzUyZDNhYSIgc3RvcC1vcGFjaXR5PSIxIiBvZmZzZXQ9IjEiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+);
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0, #3f95ea), color-stop(1, #52d3aa));
+  background-image: -webkit-repeating-linear-gradient(top left, #3f95ea 0%, #52d3aa 100%);
+  background-image: repeating-linear-gradient(to bottom right, #3f95ea 0%, #52d3aa 100%);
+}
+
+.app-block-list {
+  min-height: calc(100% - 61px);
+}
+
+.app-button {
+  background: #52d3aa;
+  border: 2px solid transparent !important;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 10px 20px;
+  font-size: 14px;
+  line-height: 1.42857;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.app-block {
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px;
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  height: 170px;
+
+  .describe {
+    max-height: 56px;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .update-content {
+    color: #000000;
+    white-space: pre-line;
+    text-align: left;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    height: 65px;
+  }
+
+  .describe::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+  }
+
+  .describe::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #535353;
+  }
+
+  .describe::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background: #ededed;
+  }
+
+  .title {
+    color: #000;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 0px;
+    margin-top: 5px;
+  }
+
+  .app-button {
+    margin-top: 15px;
+  }
+
+  .version {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size: 16px;
+    color: #0b0b0b;
+
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+  }
+
+  a:last-child {
+    margin-left: 10px;
+  }
+
+  .img {
+    display: inherit;
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.app-page {
+  margin-top: 10px;
+}

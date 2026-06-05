@@ -1,0 +1,15 @@
+{
+  "name": "@ccxc/common",
+  "version": "1.0.3",
+  "description": "xc-common",
+  "scripts": {
+    "build": "npm run tsc && npm run pack && npm run copy && npm run clean",
+    "tsc": "ng build xc-common",
+    "pack": "cd ./dist/ && npm pack",
+    "copy": "copy /y .\\dist\\ccxc-common-*.tgz .\\..\\..\\lib\\ccxc-common-*.tgz",
+    "clean": "del /s /q .\\dist && rd /s /q .\\dist && npm cache clean --force"
+  },
+  "devDependencies": {
+    "@angular/cli": "^9.1.15"
+  }
+}

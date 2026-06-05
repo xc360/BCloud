@@ -1,0 +1,80 @@
+<div class="table-all">
+  <div class="table-module">
+    <ng-container *ngFor="let block of tableDetailModel.config.modules,let i=index">
+      <ng-container *ngIf="!block.hidden">
+        <div *ngIf="block.type==COMMON_DETAIL.header" class="table-header"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span>{{block.name}}</span>
+          <ng-container *ngIf="block.operate&&(block.operate.bAuthority|BAuthority)">
+            <a [ngStyle]="block.operate.style?block.operate.style:{}"
+               (click)="block.operate.confirmFun(tableDetailModel.formInfo)">{{block.operate.name}}</a>
+          </ng-container>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.block" class="table-block"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span">{{block.name}}：</span>
+          <div class="table-input">
+            <span>{{block.customShowFun ? block.customShowFun(tableDetailModel.formInfo) : tableDetailModel.formInfo[block.field]}}</span>
+            <ng-container *ngIf="block.operate&&(block.operate.bAuthority|BAuthority)">
+              <a [ngStyle]="block.operate.style?block.operate.style:{}"
+                 (click)="block.operate.confirmFun(tableDetailModel.formInfo)">{{block.operate.name}}</a>
+            </ng-container>
+          </div>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.line" class="table-line" [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span float">{{block.name}}：</span>
+          <div class="table-input">
+            <span>{{block.customShowFun ? block.customShowFun(tableDetailModel.formInfo) : tableDetailModel.formInfo[block.field]}}</span>
+            <ng-container *ngIf="block.operate&&(block.operate.bAuthority|BAuthority)">
+              <a [ngStyle]="block.operate.style?block.operate.style:{}"
+                 (click)="block.operate.confirmFun(tableDetailModel.formInfo)">{{block.operate.name}}</a>
+            </ng-container>
+          </div>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.lineImg" class="table-line"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span float">{{block.name}}：</span>
+          <div class="table-input">
+            <div class="input-block image_frame" #imageFrame (click)="openImage(img)">
+              <img class="line-img image" #img [src]="tableDetailModel.formInfo[block.field]" (load)="loadImage(imageFrame,img)">
+            </div>
+          </div>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.lineImages" class="table-line"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span float">{{block.name}}：</span>
+          <div class="table-inputs">
+            <ng-container *ngFor="let url of tableDetailModel.formInfo[block.field]">
+              <div class="inputs-block image_frame" #imageFrame (click)="openImage(img)">
+                <img #img class="line-img image" [src]="url" (load)="loadImage(imageFrame,img)">
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.dict" class="table-block"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span">{{block.name}}：</span>
+          <div class="table-input">
+            <span>{{tableDetailModel.formInfo[block.field] | dictDesc:block.dictType:block.options|async}}</span>
+          </div>
+        </div>
+        <div *ngIf="block.type==COMMON_DETAIL.date" class="table-block"
+             [ngStyle]="block.blockStyle?block.blockStyle:{}">
+          <span class="table-span">{{block.name}}：</span>
+          <div class="table-input">
+            <span>{{tableDetailModel.formInfo[block.field] | date:block.dateFormat ? block.dateFormat : 'yyyy-MM-dd HH:mm:ss'}}</span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="table-button">
+    <button *ngIf="tableDetailModel.config.revertUrl&&tableDetailModel.config.revertName" nz-button
+            (click)="tableDetailModel.config.revertFun?tableDetailModel.config.revertFun():revert(tableDetailModel.config.revertUrl)">
+      {{tableDetailModel.config.revertName}}
+    </button>
+  </div>
+  <div class="img-frame" *ngIf="openUrl" (click)="openUrl=null">
+    <img class="open-img" [src]="openUrl">
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+
+<!--  创建应用-->
+<nz-modal [(nzVisible)]="createApp.isVisible" nzTitle="应用管理"
+          (nzOnCancel)="createApp.isVisible = false"
+          (nzOnOk)="createAppOk()" (nzAfterOpen)="formInfoComponent.focus('appName')"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>
+<!--  应用秘钥-->
+<nz-modal [(nzVisible)]="secretInfo.isVisible" nzTitle="应用秘钥"
+          (nzOnCancel)="secretInfo.isVisible = false"
+          nzOkText="复制秘钥"
+          (nzOnOk)="secretInfo.isVisible = false;homeService.copy(secretInfo.appSecret)">
+  <nz-form-control>
+    <span>应用ID：</span><a>{{secretInfo.appId}}</a>
+  </nz-form-control>
+  <nz-form-control>
+    <span>秘钥：</span><a>{{secretInfo.appSecret}}</a>
+  </nz-form-control>
+  <nz-form-control>
+    <button nz-button nzType="primary" (click)="updateSecret(secretInfo)">更新秘钥</button>
+  </nz-form-control>
+</nz-modal>
+<!--  拒绝原因-->
+<nz-modal nzTitle="拒绝原因"
+          [(nzVisible)]="isVisible" [nzOkText]="'关闭'" [nzCancelText]="null"
+          (nzOnCancel)="isVisible = false" (nzOnOk)="isVisible = false"
+          [nzOkDisabled]="formInfoModel1.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel1"></app-form-info>
+</nz-modal>
+<!--  申请原因-->
+<nz-modal nzTitle="申请原因"
+          [(nzVisible)]="isApplyVisible" (nzOnCancel)="isApplyVisible = false"
+          (nzOnOk)="confirmOk()" [nzOkDisabled]="formInfoModel2.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel2"></app-form-info>
+</nz-modal>

@@ -1,0 +1,73 @@
+/*输入块样式*/
+.input-block {
+    position: relative;
+    color: #d9d9d9;
+    margin-bottom: 20px;
+}
+
+.input-block .icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    position: absolute;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
+
+/*按钮块样式*/
+.button-block {
+    position: relative;
+    color: #d9d9d9;
+    margin-bottom: 10px;
+}
+
+.button-block .xc-button {
+    color: #fff;
+    background-color: #1890ff;
+    border: 1px solid #1890ff;
+}
+
+.button-block .xc-button:hover {
+    color: #fff;
+    background-color: #40a9ff;
+    border: 1px solid #1890ff;
+}
+
+/*多选框*/
+.input-checkbox {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-checkbox .checkbox {
+    margin-top: 5px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.input-checkbox .checkbox input {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.input-checkbox .checkbox span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*错误信息*/
+.error {
+    color: red;
+    font-size: 14px;
+    display: none;
+}
+
+.required::before {
+    content: '*';
+    color: red;
+}

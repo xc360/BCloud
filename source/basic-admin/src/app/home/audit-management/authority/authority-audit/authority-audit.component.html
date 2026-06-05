@@ -1,0 +1,23 @@
+<nz-tabset [nzType]="'card'" [nzSelectedIndex]="tabIndex" [nzTabBarStyle]="{'marginBottom': '0px'}">
+  <nz-tab nzTitle="待审核" (nzClick)="auditStatus='1';tabIndex=0;init()">
+    <div class="tab_content">
+      <app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="已审核" (nzClick)="auditStatus='2';tabIndex=1;init()">
+    <div class="tab_content">
+      <app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="已拒绝" (nzClick)="auditStatus='3';tabIndex=2;init()">
+    <div class="tab_content">
+      <app-table-find [tableFindModel]="tableFindModel"></app-table-find>
+    </div>
+  </nz-tab>
+</nz-tabset>
+<!--  权限审核-->
+<nz-modal nzTitle="权限审核" [(nzVisible)]="isVisible"
+          (nzOnCancel)="isVisible = false" (nzOnOk)="confirmOk()"
+          [nzOkDisabled]="formInfoModel.getDisabled()||appService.getLoading()">
+  <app-form-info [formInfoModel]="formInfoModel"></app-form-info>
+</nz-modal>

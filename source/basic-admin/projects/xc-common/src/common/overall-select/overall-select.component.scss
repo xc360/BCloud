@@ -1,0 +1,40 @@
+nz-select {
+  width: 100%;
+}
+
+.overall-select {
+  height: 30px;
+
+  .form-block {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 290px;
+
+
+    .label {
+      display: inline-block;
+      vertical-align: top;
+      text-align: right;
+      width: 30%;
+      line-height: 40px;
+      padding-right: 5px;
+    }
+
+    @media (max-width: 575px) {
+      .label::after {
+        content: ":";
+        margin: 0 8px 0 2px;
+      }
+    }
+
+    .block {
+      display: inline-block;
+      vertical-align: top;
+      max-width: calc(100% - 30%);
+      width: 62%;
+    }
+
+  }
+}

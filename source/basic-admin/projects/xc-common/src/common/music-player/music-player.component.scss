@@ -1,0 +1,53 @@
+.xc-music-player {
+  .name {
+    padding-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  .controller {
+    margin-top: 10px;
+
+    button {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .volume {
+      display: inline-block;
+      vertical-align: top;
+
+      .volume-icon {
+        width: 15px;
+        color: #1890ff;
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 5px;
+      }
+
+      .volume-slider {
+        width: 86px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: -9px;
+      }
+    }
+  }
+
+  .music-list {
+    margin-top: 10px;
+
+    ::ng-deep .ant-spin-container {
+      height: 229px;
+      overflow-y: auto;
+    }
+
+    .music-tb {
+      background-color: #2e86ef;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+  }
+}
+

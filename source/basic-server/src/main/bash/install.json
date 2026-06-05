@@ -1,0 +1,80 @@
+{
+  "appName": "基础服务平台",
+  "appVersion": "v1.0.0",
+  "logoUrl": "https://cbyzgf.com/FCloud/open/disk/DN1056747603/BCloud/app/1/logo/202204282011138218.png",
+  "apps": [
+    {
+      "name": "后端配置",
+      "type": "yaml",
+      "filePath": "/bootstrap-dev.yml",
+      "inputs": [
+        {
+          "key": "spring.datasource.url",
+          "name": "数据库地址",
+          "type": "input"
+        },
+        {
+          "key": "spring.datasource.username",
+          "name": "数据库用户名",
+          "type": "input"
+        },
+        {
+          "key": "spring.datasource.password",
+          "name": "数据库密码",
+          "type": "input"
+        },
+        {
+          "key": "server.port",
+          "name": "端口",
+          "type": "input"
+        }
+      ]
+    },
+    {
+      "name": "用户端配置",
+      "type": "text",
+      "filePath": "/public/static/assets/config.js",
+      "inputs": [
+        {
+          "key": "text",
+          "name": "用户端配置",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "name": "管理端配置",
+      "type": "text",
+      "filePath": "/public/admin/config.40e9ccbb3199a78bd371.js",
+      "inputs": [
+        {
+          "key": "text",
+          "name": "管理端配置",
+          "type": "textarea"
+        }
+      ]
+    }
+  ],
+  "database": {
+    "databaseVersion": "v1.0.0",
+    "installSqlPath": "/db/create.sql",
+    "upgradeSqlPath": "/db/update.sql",
+    "uninstallSqlPath": "/db/uninstall.sql",
+    "urlKey": "spring.datasource.url",
+    "userNameKey": "spring.datasource.username",
+    "passwordKey": "spring.datasource.password"
+  },
+  "pidPath": "/service.pid",
+  "start": {
+    "filePath": "/",
+    "linuxFileName": "start.sh",
+    "name": "启动配置",
+    "winFileName": "start.bat"
+  },
+  "stop": {
+    "filePath": "/",
+    "linuxFileName": "stop.sh",
+    "name": "停止配置",
+    "winFileName": "stop.bat"
+  }
+}

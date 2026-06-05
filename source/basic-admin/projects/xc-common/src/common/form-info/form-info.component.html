@@ -1,0 +1,180 @@
+<div id="form-info" [ngClass]="formInfoModel.formConfig.styleClass?formInfoModel.formConfig.styleClass:'edit-form'">
+  <ng-container *ngFor="let component of formInfoModel.formConfig.components;let i=index">
+    <ng-container *ngIf="!component.hidden">
+      <ng-container *ngIf="component.header">
+        <div class="form-header">{{component.name}}</div>
+      </ng-container>
+      <nz-form-item *ngIf="!component.header&&!component.button"
+                    [class]="component.styleClass?component.styleClass:'form-block'">
+        <nz-form-label class="label" [nzRequired]="component.required">{{component.name}}</nz-form-label>
+        <nz-form-control class="block">
+          <ng-container *ngIf="component.input">
+            <input [id]="component.field" nz-input
+                   [disabled]="component.input.disabled"
+                   [type]="component.input.type?component.input.type:'text'"
+                   [placeholder]="component.name"
+                   [maxLength]="component.input.maxLength"
+                   (blur)="component.input.inputBlur?component.input.inputBlur($event,formInfoModel.formInfo):null"
+                   [(ngModel)]="formInfoModel.formInfo[component.field]"/>
+          </ng-container>
+          <ng-container *ngIf="component.select">
+            <nz-select nzShowSearch
+                       [disabled]="component.select.disabled"
+                       [nzMaxTagCount]="component.select.maxTagCount"
+                       [nzMaxTagPlaceholder]="selectPlaceHolder"
+                       [nzAllowClear]="!component.select||component.select.allowClear===undefined?true:component.select.allowClear"
+                       [(ngModel)]="formInfoModel.formInfo[component.field]"
+                       (nzOpenChange)="component.select.openFun?component.select.openFun(formInfoModel.formInfo,component,$event):null"
+                       (ngModelChange)="component.select.confirmFun?component.select.confirmFun(formInfoModel.formInfo,component):null"
+                       (nzOnSearch)="component.select.searchFun?component.select.searchFun(formInfoModel.formInfo,component):null"
+                       [nzMode]="component.select.multiple?'multiple':'default'" [nzPlaceHolder]="component.name">
+              <ng-container *ngFor="let arr of component.select.dictType|dictList:component.select.options|async">
+                <nz-option [nzLabel]="arr.name" [nzValue]="arr.value"
+                           [nzHide]="component.select.selectedHide?null:component.select.multiple&&!isNotSelected(formInfoModel.formInfo[component.field],arr.value)"></nz-option>
+              </ng-container>
+            </nz-select>
+            <ng-template #selectPlaceHolder let-select>{{ select.length }}更多选择</ng-template>
+          </ng-container>
+          <ng-container *ngIf="component.selectGroup">
+            <nz-select [nzMaxTagCount]="component.selectGroup.maxTagCount"
+                       [nzMaxTagPlaceholder]="selectGroupPlaceHolder"
+                       nzShowSearch
+                       [nzAllowClear]="!component.selectGroup||component.selectGroup.allowClear===undefined?true:component.selectGroup.allowClear"
+                       [(ngModel)]="formInfoModel.formInfo[component.field]"
+                       [nzMode]="component.selectGroup.multiple?'multiple':'default'" [nzPlaceHolder]="component.name">
+              <ng-container *ngFor="let key of getObjKeys(component.selectGroup.groupMap)">
+                <nz-option-group [nzLabel]="key|dictDesc: component.selectGroup.dictType|async">
+                  <ng-container *ngFor="let child of component.selectGroup.groupMap[key]">
+                    <nz-option [nzLabel]="child.name" [nzValue]="child.value"
+                               [nzHide]="component.selectGroup.selectedHide?null:component.selectGroup.multiple&&!isNotSelected(formInfoModel.formInfo[component.field],child.value)"></nz-option>
+                  </ng-container>
+                </nz-option-group>
+              </ng-container>
+            </nz-select>
+            <ng-template #selectGroupPlaceHolder let-selectGroup>{{ selectGroup.length }}更多选择</ng-template>
+          </ng-container>
+          <ng-container *ngIf="component.selectTree">
+            <nz-tree-select
+              [(ngModel)]="formInfoModel.formInfo[component.field]"
+              [nzNodes]="component.selectTree.trees"
+              nzShowSearch
+              (nzTreeClick)="component.selectTree.confirmFun?component.selectTree.confirmFun(formInfoModel.formInfo,component,$event):null"
+              (nzOpenChange)="openChange(formInfoModel.formInfo[component.field], component.selectTree.trees)"
+              [nzExpandedKeys]="expandedKeys"
+              [nzDropdownStyle]="{maxHeight: '300px'}"
+              [nzMaxTagPlaceholder]="selectTreePlaceHolder"
+              [nzMaxTagCount]="component.selectTree.maxTagCount"
+              [nzAllowClear]="!component.selectTree||component.selectTree.allowClear===undefined?true:component.selectTree.allowClear"
+              [nzCheckable]="component.selectTree.checkable"
+              [nzCheckStrictly]="component.selectTree.checkStrictly"
+              [disabled]="component.selectTree.disabled"
+              [nzPlaceHolder]="component.name">
+            </nz-tree-select>
+            <ng-template #selectTreePlaceHolder let-selectTree>{{ selectTree.length }}更多选择</ng-template>
+          </ng-container>
+          <ng-container *ngIf="component.switch">
+            <nz-switch [(ngModel)]="formInfoModel.formInfo[component.field]"
+                       [disabled]="component.switch.disabled"></nz-switch>
+          </ng-container>
+          <ng-container *ngIf="component.textarea">
+          <textarea [id]="component.field" nz-input [placeholder]="component.name"
+                    [maxLength]="component.textarea.maxLength" [disabled]="component.textarea.disabled"
+                    [rows]="component.textarea.rows" [(ngModel)]="formInfoModel.formInfo[component.field]"></textarea>
+          </ng-container>
+          <ng-container *ngIf="component.inputNumber">
+            <nz-input-number
+              [nzPrecision]="notNull(component.inputNumber.precision)?component.inputNumber.precision:null"
+              [(ngModel)]="formInfoModel.formInfo[component.field]"
+              [nzMin]="component.inputNumber.min"
+              [nzMax]="component.inputNumber.max"
+              [nzStep]="component.inputNumber.step?component.inputNumber.step:1"
+              (ngModelChange)="component.inputNumber.changeFun?component.inputNumber.changeFun(formInfoModel.formInfo,$event):null"
+              (nzBlur)="component.inputNumber.blurFun?component.inputNumber.blurFun(formInfoModel.formInfo,$event):null"
+              [disabled]="component.inputNumber.disabled"
+            ></nz-input-number>
+          </ng-container>
+          <ng-container *ngIf="component.text">
+            <span class="text">{{formInfoModel.formInfo[component.field]}}</span>
+          </ng-container>
+          <ng-container *ngIf="component.date">
+            <nz-date-picker [nzStyle]="{width: '100%'}" style="width:100%"
+                            [nzDisabledDate]="component.date.disabledDate"
+                            [nzFormat]="component.date.format?component.date.format:'yyyy-MM-dd'"
+                            [nzShowTime]="component.date.showTime?component.date.showTime:false"
+                            [(ngModel)]="formInfoModel.formInfo[component.field]"
+                            (ngModelChange)="component.date.changeFun?component.date.changeFun(formInfoModel.formInfo,$event):null"
+                            [disabled]="component.date.disabled">
+            </nz-date-picker>
+          </ng-container>
+          <ng-container *ngIf="component.dateTime">
+            <nz-time-picker style="width:100%"
+                            (ngModelChange)="component.dateTime.changeFun?component.dateTime.changeFun(formInfoModel.formInfo,$event):null"
+                            [(ngModel)]="formInfoModel.formInfo[component.field]"
+                            [nzFormat]="component.dateTime.format?component.dateTime.format:'HH:mm'"
+                            [disabled]="component.dateTime.disabled">
+            </nz-time-picker>
+          </ng-container>
+          <ng-container *ngIf="component.uploadPicture">
+            <div *ngIf="!component.uploadPicture.multiple" class="picture-upload"
+                 (click)="component.uploadPicture.clickFun?component.uploadPicture.clickFun(formInfoModel.formInfo,component):null">
+              <ng-container *ngIf="!formInfoModel.formInfo[component.field]">
+                <i class="upload-icon" nz-icon [nzType]="component.uploadPicture.loading ? 'loading' : 'plus'"></i>
+                <div class="ant-upload-text">Upload</div>
+              </ng-container>
+              <img *ngIf="formInfoModel.formInfo[component.field]" [src]="formInfoModel.formInfo[component.field]"
+                   style="width: 100%"/>
+            </div>
+            <ng-container *ngIf="component.uploadPicture.multiple">
+              <ng-container *ngFor="let file of formInfoModel.formInfo[component.field];let i=index">
+                <div class="picture-upload uploads">
+                  <i class="picture-delete" nz-icon nzType="delete" nzTheme="outline"
+                     (click)="deletePictureClick(component, i)"></i>
+                  <img [src]="file.url" style="width: 100%"/>
+                </div>
+              </ng-container>
+              <div class="picture-upload uploads"
+                   *ngIf="formInfoModel.formInfo[component.field].length<component.uploadPicture.maxLength"
+                   (click)="component.uploadPicture.clickFun?component.uploadPicture.clickFun(formInfoModel.formInfo,component):null">
+                <i class="upload-icon" nz-icon [nzType]="component.uploadPicture.loading ? 'loading' : 'plus'"></i>
+                <div class="ant-upload-text">Upload</div>
+              </div>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngIf="component.linkageSelect">
+            <app-linkage-select
+              [selectItem]="component.linkageSelect.children"
+              [formInfo]="formInfoModel.formInfo"></app-linkage-select>
+          </ng-container>
+          <ng-container *ngIf="component.uploadInput">
+            <div class="upload-input">
+              <input *ngIf="!component.uploadInput.isUpload"
+                     nz-input [placeholder]="component.name" [maxLength]="255"
+                     [(ngModel)]="formInfoModel.formInfo[component.field]"/>
+              <button class="upload-input-button" *ngIf="component.uploadInput.isUpload" nz-button [nzType]="'primary'"
+                      (click)="component.uploadInput.confirmFun?component.uploadInput.confirmFun(formInfoModel.formInfo,component):null">
+                请选择
+              </button>
+              <input *ngIf="component.uploadInput.isUpload" [placeholder]="component.name"
+                     class="upload-input-input" [maxLength]="component.uploadInput.maxLength" nz-input [disabled]="true"
+                     [(ngModel)]="formInfoModel.formInfo[component.field]"/>
+            </div>
+          </ng-container>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+  </ng-container>
+  <div class="button-block">
+    <ng-container *ngFor="let component of formInfoModel.formConfig.components;let i=index">
+      <ng-container *ngIf="component.button">
+        <div class="form-button">
+          <button nz-button
+                  [nzType]="component.button.type?component.button.type:'primary'"
+                  (click)="component.button.confirmFun?component.button.confirmFun(formInfoModel.formInfo,component):null">
+            <i *ngIf="component.button.icon" nz-icon [nzType]="component.button.icon"></i>
+            {{component.name}}
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

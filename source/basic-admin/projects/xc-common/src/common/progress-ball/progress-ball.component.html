@@ -1,0 +1,24 @@
+<div class="progress-all">
+  <div class="progress-ball"
+       [ngStyle]="{ width: 80+config.size+'px',height: 80+config.size+'px'}">
+    <div class="ball" [ngStyle]="{backgroundColor:config.backgroundColor}"></div>
+    <div class="water" [ngStyle]="{marginTop:60-(120/100)*config.progress+'%',backgroundColor:config.backgroundColor}">
+      <div class="water-1" [ngStyle]="{
+         animation: 'wave '+config.animSpeed+'s linear infinite',
+         backgroundColor:config.waterColor}"></div>
+      <div class="water-2" [ngStyle]="{marginTop: 40+config.size/2+'px',backgroundColor:config.waterColor}"></div>
+      <div class="water-3" [ngStyle]="{
+         animation: 'wave1 '+config.animSpeed+'s linear infinite',backgroundColor:config.backgroundColor}"></div>
+      <div class="water-4"
+           [ngStyle]="{marginTop: 80+config.size+'px',backgroundColor:config.waterColor,marginLeft:60-(120/100)*config.progress+'%'}"></div>
+    </div>
+  </div>
+  <div class="ball-progress" [ngStyle]="{color:config.fontColor,top:13-config.fontSize+'px'}">
+    <span class="progress-num"
+          [ngStyle]="{fontSize:30.777+config.fontSize+config.size/6+'px'}">{{config.showValue}}</span>
+    <span class="progress-unit"
+          [ngStyle]="{fontSize:11.777+config.fontSize+config.size/6+'px'}">{{config.unit}}</span>
+  </div>
+</div>
+
+

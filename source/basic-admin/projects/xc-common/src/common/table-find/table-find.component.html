@@ -1,0 +1,177 @@
+<div class="table-find">
+  <div class="tf-find" *ngIf="tableFindModel.config.openFind">
+    <app-form-info [formInfoModel]="tableFindModel.formInfoModel"></app-form-info>
+  </div>
+  <div class="tf-button" *ngIf="tableFindModel.config.openButton">
+    <ng-container *ngFor="let button of tableFindModel.config.buttons">
+      <ng-container *ngIf="!button.hidden">
+        <ng-container *ngIf="button.type===COMMON_TYPE.button.MIDDLING">
+          <button nz-button *ngIf="button.bAuthority|BAuthority"
+                  (click)="button.confirmFun?button.confirmFun(tableFindModel.formInfo,tableFindModel):null"
+                  [disabled]="button.disabledFun?button.disabledFun(tableFindModel.formInfo,tableFindModel):false"
+                  [nzType]="'primary'">
+            <i nz-icon [nzType]="button.icon"></i>
+            {{button.name}}
+          </button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="tf-table" *ngIf="tableFindModel.config.openTable">
+    <div class="label" *ngIf="tableFindModel.config.openLabel">
+      <nz-breadcrumb nzSeparator=">">
+        <ng-container *ngFor="let label of tableFindModel.config.breadcrumb.labels;let i=index">
+          <nz-breadcrumb-item
+            (click)="tableFindModel.config.breadcrumb.breadcrumbFun?
+            tableFindModel.config.breadcrumb.breadcrumbFun(label,i,tableFindModel):null">
+            <a>{{label.name}}</a>
+          </nz-breadcrumb-item>
+        </ng-container>
+      </nz-breadcrumb>
+    </div>
+    <nz-table #dataTable
+              [nzPageSize]="tableFindModel.pagingModel.size"
+              [nzData]="tableFindModel.dataModels"
+              [nzTotal]="tableFindModel.pagingModel.total"
+              [nzPageIndex]="tableFindModel.pagingModel.current"
+              [nzFrontPagination]="tableFindModel.config.frontPaging"
+              [nzShowSizeChanger]="tableFindModel.config.paging.limits.length>0"
+              [nzShowQuickJumper]="true"
+              [nzShowPagination]="tableFindModel.config.openPaging"
+              (nzPageIndexChange)="indexChange($event)"
+              (nzPageSizeChange)="sizeChange($event)"
+              [nzPageSizeOptions]="tableFindModel.config.paging.limits"
+              [nzShowTotal]="totalTemplate"
+              nzSize="small">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <tr class="thead-tr">
+        <ng-container *ngFor="let table of tableFindModel.config.tables">
+          <ng-container *ngIf="!table.hidden">
+            <th *ngIf="table.type===COMMON_TYPE.table.CHECKBOX"
+                [ngStyle]="table.thStyle"
+                [nzShowSort]="table.isSort"
+                [nzSortKey]="table.field"
+                [(nzSort)]="table.sort"
+                [nzShowFilter]="table.isFilter"
+                [nzFilters]="table.options?table.options:[]"
+                [nzFilterMultiple]="table.multiple"
+                (nzFilterChange)="search($event,table)"
+                [nzShowCheckbox]="true"
+                [nzChecked]="tableFindModel.selectedAll"
+                (nzCheckedChange)="tableFindModel.checkAll($event)">
+              <span class="tr-checkbox-text"> {{table.name}}</span>
+            </th>
+            <th *ngIf="table.type!==COMMON_TYPE.table.CHECKBOX"
+                [ngStyle]="table.thStyle"
+                [nzShowSort]="table.isSort"
+                [nzSortKey]="table.field"
+                [(nzSort)]="table.sort"
+                [nzShowFilter]="table.isFilter"
+                [nzFilters]="table.options?table.options:[]"
+                [nzFilterMultiple]="table.multiple"
+                (nzFilterChange)="search($event,table)">
+              {{table.name}}
+            </th>
+          </ng-container>
+        </ng-container>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let data of dataTable.data">
+        <tr class="tbody-tr">
+          <ng-container *ngFor="let table of tableFindModel.config.tables;let i=index">
+            <ng-container *ngIf="!table.hidden">
+              <td *ngIf="table.type===COMMON_TYPE.table.CHECKBOX" [nzShowCheckbox]="true" [ngStyle]="table.tdStyle"
+                  (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null"
+                  [nzChecked]="data.selected" (nzCheckedChange)="tableFindModel.check($event,data)">
+                <i *ngIf="data['isFile']===undefined?false:!data['isFile']" nz-icon nzType="folder"
+                   nzTheme="outline"></i>
+                <i *ngIf="data['isFile']===undefined?false:data['isFile']" nz-icon nzType="file" nzTheme="outline"></i>
+                {{ commonTool.conversion(data.data, table.field)}}
+              </td>
+              <ng-container *ngIf="table.type!==COMMON_TYPE.table.CHECKBOX">
+                <td *ngIf="table.type===COMMON_TYPE.table.FILE_FOLDER_ICON" [ngStyle]="table.tdStyle"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  <i *ngIf="data['isFile']===undefined?false:!data['isFile']" nz-icon nzType="folder"
+                     nzTheme="outline"></i>
+                  <i *ngIf="data['isFile']===undefined?false:data['isFile']" nz-icon nzType="file"
+                     nzTheme="outline"></i>
+                  {{ commonTool.conversion(data.data, table.field)}}
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.RADIO" [ngStyle]="table.tdStyle"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  <label nz-radio (ngModelChange)="tableFindModel.singleSelect(data)" [ngModel]="data.selected"></label>
+                  <i *ngIf="data['isFile']===undefined?false:!data['isFile']" nz-icon nzType="folder"
+                     nzTheme="outline"></i>
+                  <i *ngIf="data['isFile']===undefined?false:data['isFile']" nz-icon nzType="file"
+                     nzTheme="outline"></i>
+                  {{ commonTool.conversion(data.data, table.field)}}
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.TEXT" [ngStyle]="table.tdStyle"
+                    title="{{ commonTool.conversion(data.data, table.field)}}"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  {{ commonTool.conversion(data.data, table.field)}}
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.JUMP" [ngStyle]="table.tdStyle"
+                    title="{{ commonTool.conversion(data.data, table.field)}}"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):
+                    commonTool.jumpNewTab( commonTool.conversion(data.data, table.field))">
+                  <span class="jump">{{commonTool.conversion(data.data, table.field)}}</span>
+                </td>
+                <td class="image-show" *ngIf="table.type===COMMON_TYPE.table.IMAGE"
+                    (click)="table.confirmFun?table.confirmFun(data, table, tableFindModel):null"
+                    [ngStyle]="commonTool.conversion(data.style?data.style:{} , table.field)">
+                  <img class="image" #imageId
+                       *ngIf="commonTool.conversion(data.data, table.field)"
+                       [src]="commonTool.conversion(data.data, table.field)"
+                       (mouseenter)="enlargeMouseEnter(imageId,i)"
+                       (mouseleave)="enlargeMouseLeave(imageId,i)">
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.DICT_DESC" [ngStyle]="table.tdStyle"
+                    title="{{ commonTool.conversion(data.data, table.field)|dictDesc:table.dictType:table.options|async}}"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  {{ commonTool.conversion(data.data, table.field)|dictDesc:table.dictType:table.options|async}}
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.PROGRESS" [ngStyle]="table.tdStyle"
+                    class="progress" (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  <div *ngIf="data.progress&&data.progress.type!==COMMON_TYPE.progress.PROGRESS">
+                    <span>{{ commonTool.conversion(data.data, table.field)}}</span>
+                  </div>
+                  <div *ngIf="data.progress&&data.progress.type===COMMON_TYPE.progress.PROGRESS">
+                    <nz-progress [nzPercent]="data.data[table.field]"
+                                 [nzType]="data.progress['fastFinish']?'circle':'line'"
+                                 [nzWidth]="data.progress['fastFinish']?16:132"
+                                 [nzStatus]="data.progress&&data.progress.status">
+                    </nz-progress>
+                    <span class="fast-finish" *ngIf="data.progress['fastFinish']">秒传</span>
+                  </div>
+                </td>
+                <td *ngIf="table.type===COMMON_TYPE.table.OPERATE" [ngStyle]="table.tdStyle"
+                    (click)="table.confirmFun?table.confirmFun(data,table,tableFindModel):null">
+                  <ng-container *ngFor="let operate of table.operates">
+                    <ng-container
+                      *ngIf="!operate.hidden&&(commonTool.notNull(data[operate.field])?data[operate.field]:true)">
+                      <div class="td-operate" *ngIf="(operate.bAuthority|BAuthority)">
+                        <a (click)="operate.confirmFun?operate.confirmFun(data,table,tableFindModel):null">
+                          {{operate.name}}
+                        </a>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </td>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </ng-container>
+      </tbody>
+      <ng-template #totalTemplate let-total let-pageIndex>
+        <div class="total-template">
+          <span>共{{total}}条记录</span>
+          <span>第{{tableFindModel.pagingModel.current}}/{{totalPage()}}页</span>
+        </div>
+      </ng-template>
+    </nz-table>
+  </div>
+</div>
+

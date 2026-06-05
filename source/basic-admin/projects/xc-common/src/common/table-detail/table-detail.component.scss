@@ -1,0 +1,217 @@
+$system-color: #001529;
+.table-all {
+  background-color: #ffffff;
+  padding: 0.75rem 0;
+
+  .table-module {
+    margin-top: 10px;
+
+    .table-header {
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem 0;
+      font: bold 1rem yahei;
+      margin: 0 2rem 20px;
+    }
+
+    .table-header::before {
+      content: "I";
+      background-color: $system-color;
+      color: transparent;
+      margin: 0 0.5rem 0 0;
+    }
+
+    .table-block {
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: 20px;
+
+      .table-span {
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+        width: 130px;
+      }
+
+      .table-input {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 10px;
+        width: calc(100% - 140px);
+      }
+    }
+
+    .table-line {
+      white-space: pre-line;
+      margin-bottom: 20px;
+
+      .table-span {
+        text-align: right;
+        display: inline-block;
+        width: 130px;
+        float: left;
+      }
+
+      .image_frame {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .table-input {
+        display: inline-block;
+        width: calc(100% - 140px);
+
+        .input-block {
+          display: inline-block;
+          vertical-align: top;
+          margin-left: 10px;
+          margin-bottom: 10px;
+          cursor: pointer;
+
+          .line-img {
+            background-color: #CCCCCC;
+          }
+        }
+      }
+
+      .table-inputs {
+        display: inline-block;
+        width: calc(100% - 140px);
+
+        .inputs-block {
+          display: inline-block;
+          vertical-align: top;
+          margin-left: 10px;
+          margin-bottom: 10px;
+          cursor: pointer;
+
+          .line-img {
+            background-color: #CCCCCC;
+          }
+        }
+      }
+    }
+  }
+
+  .table-button {
+    text-align: center;
+    margin: 0.75rem 0;
+
+    button {
+      margin: 0 1.5rem;
+    }
+  }
+
+  .img-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #00000073;
+    z-index: 20;
+    display: flex;
+    cursor: pointer;
+    // 此页面中的文字不被选中
+    -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -khtml-user-select: none; /*早期浏览器*/
+    -moz-user-select: none; /*火狐*/
+    -ms-user-select: none; /*IE10*/
+    user-select: none;
+
+    .open-img {
+      margin: 0 auto;
+      align-self: center;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+
+.table-line .table-multilevel {
+  display: inline-block;
+  margin: 0 -1px 0 0rem;
+}
+
+.table-line .table-multilevel .table-block-frame {
+  display: inline-block;
+}
+
+.table-line .table-multilevel .table-block-name {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.table-line .table-multilevel .table-block-frame .table-block-frame-name {
+  display: inline-block;
+  background-color: #fff;
+  height: 35px;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-top: 1px solid rgba(217, 217, 217, 1);
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  border-left: 1px solid rgba(217, 217, 217, 1);
+  border-radius: 0.25em 0px 0px 0.25em;
+}
+
+
+/*上传图片控件*/
+.upload-style {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.upload-style-span {
+  position: absolute;
+  margin-left: 87px;
+  cursor: pointer;
+}
+
+.upload-style img {
+  width: 100px;
+  height: 100px;
+}
+
+.table-multilevel {
+  //display: inline-block;
+  margin: 1rem 0px 0 0rem;
+}
+
+.table-multilevel .table-block-frame {
+  display: inline-block;
+}
+
+.table-multilevel .table-block-name {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.table-multilevel .table-block-frame .table-block-frame-name {
+  display: inline-block;
+  background-color: #fff;
+  height: 35px;
+  padding-top: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-top: 1px solid rgba(217, 217, 217, 1);
+  border-bottom: 1px solid rgba(217, 217, 217, 1);
+  border-left: 1px solid rgba(217, 217, 217, 1);
+  border-radius: 0.25em 0px 0px 0.25em;
+}
+
+.float {
+  float: left;
+}
+
+
